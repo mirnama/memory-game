@@ -1,0 +1,26 @@
+
+<h2>Memory Game</h2>
+
+<div class="game-board">
+  <div class="card" *ngFor="let card of cards" [class.flipped]="card.flipped" [class.matched]="card.matched" (click)="flipCard(card)">
+    <div class="card-back"></div>
+    <div class="card-front">
+      <img *ngIf="card.flipped" [src]="card.imagePath" alt="Card">
+      <img *ngIf="!card.flipped" [src]="card.backImagePath" alt="Back of Card">
+    </div>
+  </div>
+</div>
+
+
+<div class="players">
+  <div class="player" *ngFor="let player of players" [class.current]="player.id === currentPlayer">
+    <h3>{{ player.name }}</h3>
+    <p>Score: {{ player.score }}</p>
+  </div>
+</div>
+
+<div class="game-over" *ngIf="isGameOver()">
+  <h2>Game Over</h2>
+  <p>Congratulations!</p>
+  <button (click)="restartGame()">Restart</button>
+</div>
